@@ -20,6 +20,15 @@ CapsLock::
 ; CTRL + Q -> quit app / windows
 ^q::Send "!{F4}"
 
+; CTRL + SHIFT + 5 -> Snipping tool
+^+5::Send "#+{S}"
+
+; WIN + M -> minimize current window
+#m::WinMinimize("A")
+
+; WIN + S -> ß
+#s::Send "ß"
+
 ; !c::Send "^c"
 ; !v::Send "^v"
 ; !z::Send "^z"
@@ -66,6 +75,13 @@ CapsLock::
         default: Send(ih.Input) ; If another key is pressed, send it normally
     }
 }
+
+#a::Send "ä"
+#o::Send "ö"
+; #u::Send "ü"
+#+a::Send "Ä"
+#+o::Send "Ö"
+; #+u::Send "Ü"
 
 ; ---------------
 ; TEXT NAVIGATION
