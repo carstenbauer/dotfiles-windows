@@ -5,10 +5,11 @@
 ; ---------------
 
 ; CapsLock -> "Mission Control"
-CapsLock::
+$CapsLock::
 {
 	Send "#{Tab}"
 }
+$+CapsLock::CapsLock
 
 ; ALT + SPACE -> Open Start Menu
 !Space::Send "^{ESC}"
@@ -29,6 +30,31 @@ CapsLock::
 ; WIN + S -> ß
 #s::Send "ß"
 
+; CTRL + SHIFT + P -> move windows to next monitor (WIN + SHIFT + RIGHT)
+; $^+p::Send "#+{Right}"
+; CTRL + Windows + ALT + LEFT/RIGHT -> move windows to next monitor
+$^#!Left::Send "#+{Left}"
+$^#!Right::Send "#+{Right}"
+
+; In Outlook, map CTRL + ALT + left/right to ALT + left/right
+; to navigate weeks in calendar view
+#HotIf WinActive("ahk_exe OUTLOOK.EXE")
+
+^!Left::Send "!{Up}"
+^!Right::Send "!{Down}"
+
+#HotIf
+
+; In Explorer, map CTRL + ALT + left/right to ALT + left/right
+; to go backwards/forwards
+#HotIf WinActive("ahk_exe EXPLORER.EXE")
+
+$^!Up::Send "!{Left}"
+$^!Left::Send "!{Left}"
+; ^!Down::Send "!{Right}"
+
+#HotIf
+
 ; !c::Send "^c"
 ; !v::Send "^v"
 ; !z::Send "^z"
@@ -46,6 +72,7 @@ CapsLock::
 ; ---------------
 ; SNIPPETS
 ; ---------------
+:*:;;kuk::Liebe Kolleginnen und Kollegen,`n`n
 :*:;;vg::Viele Grüße`nCarsten
 :*:;;bg::Beste Grüße`nCarsten
 :*:;;fvg::Viele Grüße`nCarsten Bauer
