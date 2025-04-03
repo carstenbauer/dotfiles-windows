@@ -4,37 +4,64 @@
 ; REMAPS
 ; ---------------
 
-; CapsLock -> "Mission Control"
+; CapsLock  ->  "Mission Control"
 $CapsLock::
 {
 	Send "#{Tab}"
 }
 $+CapsLock::CapsLock
 
-; ALT + SPACE -> Open Start Menu
+; ALT + SPACE  ->  Open Start Menu
 !Space::Send "^{ESC}"
 
 ; Horizontal Scrolling
 +WheelDown::Send "{WheelRight}"
 +WheelUp::Send "{WheelLeft}"
 
-; CTRL + Q -> quit app / windows
+; CTRL + Q  ->  quit app / windows
 ^q::Send "!{F4}"
 
-; CTRL + SHIFT + 5 -> Snipping tool
+; CTRL + SHIFT + 5  ->  Snipping tool
 ^+5::Send "#+{S}"
 
-; WIN + M -> minimize current window
+; CTRL + ALT + Q  ->  lock screen
+;$^!q::Send "#l"
+$^!q::DllCall("LockWorkStation")
+
+; WIN + M  ->  minimize current window
 #m::WinMinimize("A")
+
+; WIN + ALT + F  ->  maximize current window
+;#!f::{
+#+f::{
+    win := WinExist("A")
+    if win {
+        if WinGetMinMax(win) = 1
+            WinRestore(win)  ; Restore if already maximized
+        else
+            WinMaximize(win) ; Maximize otherwise
+    }
+}
+
+; Win + Alt + Arrow Key  ->  Win + Arrow Key
+;$#!Left::Send "#{Left}"
+;$#!Right::Send "#{Right}"
+;$#!Up::Send "#{Up}"
+;$#!Down::Send "#{Down}"
+
+$#+H::Send "#{Left}"
+$#+L::Send "#{Right}"
+$#+J::Send "#{Down}"
+$#+K::Send "#{Up}"
 
 ; WIN + S -> ß
 #s::Send "ß"
 
 ; CTRL + SHIFT + P -> move windows to next monitor (WIN + SHIFT + RIGHT)
-; $^+p::Send "#+{Right}"
+; $^+p::Send "#+{Right}"H
 ; CTRL + Windows + ALT + LEFT/RIGHT -> move windows to next monitor
-$^#!Left::Send "#+{Left}"
-$^#!Right::Send "#+{Right}"
+; $^#!Left::Send "#+{Left}"
+; $^#!Right::Send "#+{Right}"
 
 ; In Outlook, map CTRL + ALT + left/right to ALT + left/right
 ; to navigate weeks in calendar view
@@ -55,6 +82,26 @@ $^!Left::Send "!{Left}"
 
 #HotIf
 
+
+
+; scrollFactor := 7  ; Increase scroll speed by this factor
+
+; #HotIf WinActive("ahk_exe FoxitPDFEditor.exe")
+; +WheelUp::
+; {
+;     Loop scrollFactor
+;         SendInput("{WheelUp}")
+; }
+; 
+; +WheelDown::
+; {
+;    Loop scrollFactor
+;         SendInput("{WheelDown}")
+; }
+; #HotIf
+
+
+
 ; !c::Send "^c"
 ; !v::Send "^v"
 ; !z::Send "^z"
@@ -73,13 +120,12 @@ $^!Left::Send "!{Left}"
 ; SNIPPETS
 ; ---------------
 :*:;;kuk::Liebe Kolleginnen und Kollegen,`n`n
-:*:;;vg::Viele Grüße`nCarsten
-:*:;;bg::Beste Grüße`nCarsten
-:*:;;fvg::Viele Grüße`nCarsten Bauer
-:*:;;fbg::Beste Grüße`nCarsten Bauer
-:*:;;mfg::Mit freundlichen Grüßen`nCarsten Bauer
-:*:;;drmfg::Mit freundlichen Grüßen`nDr. Carsten Bauer
-:*:;;ys::Yours sincerely, `nCarsten Bauer
+:*:;;vg::Viele Grüße`n`nCarsten Bauer
+:*:;;bg::Beste Grüße`n`nCarsten Bauer
+:*:;;gg::Gruß`nCarsten
+:*:;;mfg::Mit freundlichen Grüßen`n`nCarsten Bauer
+:*:;;drmfg::Mit freundlichen Grüßen`n`nDr. Carsten Bauer
+:*:;;ys::Yours sincerely, `n`nCarsten Bauer
 :*:;;dlr::Deutsches Zentrum für Luft- und Raumfahrt
 :*:;;eur::€
 ; ::ftw::Free the whales ; replaces after space or enter is pressed
